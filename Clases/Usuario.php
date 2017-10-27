@@ -2,41 +2,22 @@
 require_once ("AccesoDatos.php");
 class Usuarios
 {
-    protected $usuario;
-    protected $contraseña;
+    public $usuario;
+    public $contraseña;
 
-    public function __construct($usuario, $contraseña){
-        if($usuario !== NULL && $contraseña !== NULL){
-        $this->usuario = $usuario;
-        $this->contraseña = $contraseña;
-        }
-    }
 
-    public function GetUsuario(){
-        return $this->usuario;
+    public function TraerTodos($request, $response, $args) {
+		$todosLosUsuarios=Usuarios::TraerTodoLosUsuarios();
+		  
+     	$newResponse = $response->withJson($todosLosUsuarios, 200);  
+    	return $newResponse;
     }
-    public function GetContraseña(){
-        return $this->contraseña;
-    }
-    public function SetUsuario($value){
-        $this->usuario = $value;
-    }
-    public function SetContraseña($value){
-        $this->contraseña = $value;
-    }
-
     public static function TraerTodosLosUsuarios()
 	{
-		$arrayRetorno = array();
-		
 		$objetoAcceso = AccesoDatos::DameUnObjetoAcceso();
 		$consulta = $objetoAcceso->RetornarConsulta('SELECT id,usuario,contraseña FROM usuarios');
 		$consulta->Execute();
-		while ($fila = $consulta->fetchObject("usuarios")) 
-		 {
-			 array_push($arrayRetorno,$fila);
-		 }
-		 return $arrayRetorno;
+		return $consulta->fetchAll(PDO::FETCH_CLASS,"Usuarios");
 	}
 }
 
