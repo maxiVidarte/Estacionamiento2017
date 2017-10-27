@@ -1,5 +1,5 @@
 <?php 
-require_once ("AccesoDatos.php");
+require_once "AccesoDatos.php";
 class Usuarios
 {
     public $usuario;
@@ -7,7 +7,7 @@ class Usuarios
 
 
     public function TraerTodos($request, $response, $args) {
-		$todosLosUsuarios=Usuarios::TraerTodoLosUsuarios();
+		$todosLosUsuarios=Usuarios::TraerTodosLosUsuarios();
 		  
      	$newResponse = $response->withJson($todosLosUsuarios, 200);  
     	return $newResponse;

@@ -1,13 +1,13 @@
 var xmlHttp = new XMLHttpRequest();
 
-function llenar(usuario){
+function llenar(){
    xmlHttp.onreadystatechange =function(){
        if(this.readyState == 4 && this.status == 200){
-           document.getElementById("txtEmail").value = this.response;
-       }
+        console.log("hola mundo");
+    }
    };
-   xmlHttp.open("POST","Admin.php",true);
-   xmlHttp.send(usuario);
+   xmlHttp.open("GET","http://localhost/Estacionamiento2017/Usuario/",true);
+   xmlHttp.send();
 }
 function enviar(){
     xmlHttp.onreadystatechange = callback;
